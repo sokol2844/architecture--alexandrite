@@ -1,0 +1,11 @@
+@startuml
+'Запрос списка заказов
+MES -> Cache: Чтение из кеша
+DB -> Cache: Обновление кеша асинхронно
+note right of Cache: Используется паттерн Refresh-ahead
+
+'Обновление статуса заказа
+MES -> Cache: Запись данных в кеш
+Cache -> DB: Запись данных в БД
+note right of Cache: Используется паттерн Write-Behind
+@enduml
